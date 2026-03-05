@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>忍术结印系统 🍥</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <canvas id="particleCanvas"></canvas>
+
+    <header class="header">
+      <h1 class="title">🍥 忍术结印系统 🍥</h1>
+      <p class="subtitle">输入忍术名称，展示对应结印序列与手势</p>
+    </header>
+
+    <!-- 搜索 -->
+    <div class="search-section">
+      <div class="search-wrapper">
+        <div class="search-icon">🔍</div>
+        <input type="text" id="searchInput" class="search-input"
+               placeholder="输入忍术名称... 例如：火遁·豪火球之术" autocomplete="off">
+        <button id="searchBtn" class="search-btn">结印!</button>
+      </div>
+      <ul id="suggestionsList" class="suggestions-list hidden"></ul>
+    </div>
+
+    <!-- 忍术信息 -->
+    <div id="jutsuCard" class="jutsu-card hidden">
+      <div class="card-glow"></div>
+      <div class="jutsu-header">
+        <div class="jutsu-title-row">
+          <h2 id="jutsuName" class="jutsu-name"></h2>
+          <span id="jutsuRank" class="jutsu-rank"></span>
+        </div>
+        <p id="jutsuRomaji" class="jutsu-romaji"></p>
+      </div>
+      <div class="jutsu-meta">
+        <div class="meta-item">
+          <span class="meta-label">使用者</span>
+          <span id="jutsuUser" class="meta-value"></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">属性</span>
+          <span id="jutsuElement" class="meta-value"></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">结印数</span>
+          <span id="jutsuSealCount" class="meta-value"></span>
+        </div>
+      </div>
+      <p id="jutsuDesc" class="jutsu-desc"></p>
+    </div>
+
+    <!-- ★ 结印高亮动画区 ★ -->
+    <div id="sealSpotlight" class="seal-spotlight hidden">
+      <div class="spotlight-ring"></div>
+      <div class="spotlight-ring ring-2"></div>
+      <div class="spotlight-content">
+        <div class="spotlight-img-container" id="spotlightImgContainer">
+          <img id="spotlightImg" class="spotlight-img" src="" alt="">
+          <div id="spotlightFallback" class="spotlight-fallback" style="display:none;"></div>
+        </div>
+        <div id="spotlightName" class="spotlight-name"></div>
+        <div id="spotlightStep" class="spotlight-step"></div>
+        <div id="spotlightGuide" class="spotlight-guide"></div>
+      </div>
+    </div>
+
+    <!-- 结印序列 -->
+    <div id="sealsSection" class="seals-section hidden">
+      <h3 class="seals-title">📜 结印序列</h3>
+      <div id="sealsTimeline" class="seals-timeline"></div>
+      <div class="seals-controls">
+        <button id="replayBtn" class="control-btn replay-btn" disabled>🔄 重新结印</button>
+        <div class="speed-control">
+          <label>速度：</label>
+          <button class="speed-btn" data-speed="1000">慢</button>
+          <button class="speed-btn active" data-speed="500">中</button>
+          <button class="speed-btn" data-speed="250">快</button>
+          <button class="speed-btn" data-speed="100">疾风</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 无结印 -->
+    <div id="noSealSection" class="no-seal-section hidden">
+      <div class="no-seal-effect">
+        <div class="energy-ring"></div>
+        <div class="energy-ring ring-2"></div>
+        <div class="energy-ring ring-3"></div>
+        <span class="no-seal-emoji">✨</span>
+      </div>
+      <p class="no-seal-text">此忍术无需结印！</p>
+      <p class="no-seal-sub">纯粹的查克拉控制，这就是天才的忍术！</p>
+    </div>
+
+    <!-- 释放特效 -->
+    <div id="jutsuRelease" class="jutsu-release hidden">
+      <div class="release-text" id="releaseText"></div>
+    </div>
+
+    <!-- 快捷选择 -->
+    <div class="quick-section">
+      <h3 class="quick-title">⚡ 快捷选择</h3>
+      <div class="element-tabs">
+        <button class="tab-btn active" data-filter="all">全部</button>
+        <button class="tab-btn" data-filter="fire">🔥 火遁</button>
+        <button class="tab-btn" data-filter="water">💧 水遁</button>
+        <button class="tab-btn" data-filter="earth">🪨 土遁</button>
+        <button class="tab-btn" data-filter="lightning">⚡ 雷遁</button>
+        <button class="tab-btn" data-filter="wind">🌪️ 风遁</button>
+        <button class="tab-btn" data-filter="none">🌀 其他</button>
+      </div>
+      <div id="quickGrid" class="quick-grid"></div>
+    </div>
+
+    <footer class="footer">
+      <p>Deep♂Dark♂Fantasy 忍术工坊 · Van Darkholme 出品</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
