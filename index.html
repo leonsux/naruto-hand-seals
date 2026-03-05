@@ -7,14 +7,27 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="app">
-      <canvas id="particleCanvas"></canvas>
+    <!-- ★ 释放特效层：放在 .app 外面，直接挂在 body 下 ★ -->
+    <div id="jutsuRelease" class="jutsu-release hidden">
+      <div class="release-flash"></div>
+      <div class="release-shockwave"></div>
+      <div class="release-chakra-ring"></div>
+      <div class="release-chakra-ring delay-1"></div>
+      <div class="release-chakra-ring delay-2"></div>
+      <canvas id="releaseParticles"></canvas>
+      <div class="release-text-wrapper">
+        <div id="releaseText" class="release-text"></div>
+        <div id="releaseSub" class="release-sub"></div>
+      </div>
+    </div>
 
+    <!-- ★ 主内容（震动作用在这里）★ -->
+    <div class="app" id="appWrapper">
+      <canvas id="particleCanvas"></canvas>
       <header class="header">
         <h1 class="title">🍥 忍术结印系统 🍥</h1>
         <p class="subtitle">输入忍术名称，展示对应结印序列与手势</p>
       </header>
-
       <!-- 搜索 -->
       <div class="search-section">
         <div class="search-wrapper">
@@ -30,7 +43,6 @@
         </div>
         <ul id="suggestionsList" class="suggestions-list hidden"></ul>
       </div>
-
       <!-- 忍术信息 -->
       <div id="jutsuCard" class="jutsu-card hidden">
         <div class="card-glow"></div>
@@ -57,7 +69,6 @@
         </div>
         <p id="jutsuDesc" class="jutsu-desc"></p>
       </div>
-
       <!-- ★ 结印高亮动画区 ★ -->
       <div id="sealSpotlight" class="seal-spotlight hidden">
         <div class="spotlight-ring"></div>
@@ -76,7 +87,6 @@
           <div id="spotlightGuide" class="spotlight-guide"></div>
         </div>
       </div>
-
       <!-- 结印序列 -->
       <div id="sealsSection" class="seals-section hidden">
         <h3 class="seals-title">📜 结印序列</h3>
@@ -94,7 +104,6 @@
           </div>
         </div>
       </div>
-
       <!-- 无结印 -->
       <div id="noSealSection" class="no-seal-section hidden">
         <div class="no-seal-effect">
@@ -106,12 +115,6 @@
         <p class="no-seal-text">此忍术无需结印！</p>
         <p class="no-seal-sub">纯粹的查克拉控制，这就是天才的忍术！</p>
       </div>
-
-      <!-- 释放特效 -->
-      <div id="jutsuRelease" class="jutsu-release hidden">
-        <div class="release-text" id="releaseText"></div>
-      </div>
-
       <!-- 快捷选择 -->
       <div class="quick-section">
         <h3 class="quick-title">⚡ 快捷选择</h3>
@@ -127,12 +130,10 @@
         </div>
         <div id="quickGrid" class="quick-grid"></div>
       </div>
-
       <footer class="footer">
         <p>Deep♂Dark♂Fantasy 忍术工坊 · Van Darkholme 出品</p>
       </footer>
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>
