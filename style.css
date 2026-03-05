@@ -731,31 +731,307 @@ body {
   margin-top: 0.5rem;
 }
 
-/* ---- Release ---- */
+/* ============================================
+忍术释放特效
+============================================ */
+
 .jutsu-release {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100vw;
+  height: 100vh;
   z-index: 9999;
   pointer-events: none;
+  overflow: hidden;
 }
-.release-text {
-  font-size: 3rem;
-  font-weight: 900;
+
+.jutsu-release.hidden {
+  display: none;
+}
+
+/* ---- 全屏闪光 ---- */
+.release-flash {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  width: 200vmax;
+  height: 200vmax;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    var(--release-color, rgba(255, 255, 255, 0.9)) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+}
+
+.jutsu-release:not(.hidden) .release-flash {
+  animation: flashBurst 0.6s ease-out forwards;
+}
+
+@keyframes flashBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ---- 冲击波 ---- */
+.release-shockwave {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  border: 3px solid var(--release-color, rgba(255, 255, 255, 0.8));
+  opacity: 0;
+}
+
+.jutsu-release:not(.hidden) .release-shockwave {
+  animation: shockwaveExpand 0.8s ease-out 0.1s forwards;
+}
+
+@keyframes shockwaveExpand {
+  0% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(0);
+    border-width: 4px;
+  }
+  50% {
+    opacity: 0.5;
+    border-width: 2px;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(40);
+    border-width: 0.5px;
+  }
+}
+
+/* ---- 查克拉能量环 ---- */
+.release-chakra-ring {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  width: 80px;
+  height: 80px;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  border: 2px solid var(--release-color, rgba(255, 255, 255, 0.6));
+  box-shadow: 0 0 15px var(--release-glow, rgba(255, 255, 255, 0.3)),
+    inset 0 0 15px var(--release-glow, rgba(255, 255, 255, 0.1));
+  opacity: 0;
+}
+
+.jutsu-release:not(.hidden) .release-chakra-ring {
+  animation: chakraRingExpand 1s ease-out 0.05s forwards;
+}
+
+.release-chakra-ring.delay-1 {
+  width: 60px;
+  height: 60px;
+  animation-delay: 0.15s !important;
+}
+
+.release-chakra-ring.delay-2 {
+  width: 40px;
+  height: 40px;
+  animation-delay: 0.3s !important;
+}
+
+@keyframes chakraRingExpand {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+  }
+  30% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(25) rotate(180deg);
+  }
+}
+
+/* ---- 粒子画布 ---- */
+#releaseParticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
+/* ---- 忍术名文字 ---- */
+.release-text-wrapper {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  z-index: 10;
   text-align: center;
-  letter-spacing: 4px;
-  background: linear-gradient(135deg, #ff4500, #ffd700, #ff4500);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 1.5s ease infinite, releaseZoom 1.5s ease forwards;
-  filter: drop-shadow(0 0 30px rgba(255, 69, 0, 0.6));
+  width: max-content;
+  max-width: 90vw;
+}
+
+.release-text {
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 20px var(--release-glow, rgba(255, 255, 255, 0.8)),
+    0 0 40px var(--release-glow, rgba(255, 255, 255, 0.5)),
+    0 0 80px var(--release-glow, rgba(255, 255, 255, 0.3)),
+    0 2px 10px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.15em;
+  opacity: 0;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+}
+
+.release-text.animate-in {
+  animation: textSlashIn 0.8s ease-out forwards;
+}
+
+.release-sub {
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.3em;
+  margin-top: 0.8rem;
+  opacity: 0;
+  text-shadow: 0 0 10px var(--release-glow, rgba(255, 255, 255, 0.3));
+}
+
+.release-sub.animate-in {
+  animation: textFadeUp 0.6s ease-out 0.3s forwards;
+}
+
+@keyframes textSlashIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: blur(10px);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: blur(0);
+  }
+  60% {
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes textFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+}
+
+.release-text.fade-out {
+  animation: textFadeOut 0.5s ease-in forwards !important;
+}
+
+.release-sub.fade-out {
+  animation: textFadeOut 0.4s ease-in forwards !important;
+}
+
+@keyframes textFadeOut {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(5px);
+  }
+}
+
+/* ---- 屏幕震动（作用在内容层）---- */
+#appWrapper.screen-shake {
+  animation: screenShake 0.4s ease-out;
+}
+
+@keyframes screenShake {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-4px, 2px);
+  }
+  20% {
+    transform: translate(4px, -2px);
+  }
+  30% {
+    transform: translate(-3px, -1px);
+  }
+  40% {
+    transform: translate(3px, 1px);
+  }
+  50% {
+    transform: translate(-2px, 2px);
+  }
+  60% {
+    transform: translate(2px, -1px);
+  }
+  70% {
+    transform: translate(-1px, 1px);
+  }
+  80% {
+    transform: translate(1px, -1px);
+  }
+  90% {
+    transform: translate(-1px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* ---- 属性配色 ---- */
+.jutsu-release.element-fire {
+  --release-color: rgba(255, 80, 20, 0.9);
+  --release-glow: rgba(255, 120, 20, 0.6);
+}
+.jutsu-release.element-water {
+  --release-color: rgba(30, 144, 255, 0.9);
+  --release-glow: rgba(80, 180, 255, 0.6);
+}
+.jutsu-release.element-earth {
+  --release-color: rgba(180, 140, 60, 0.9);
+  --release-glow: rgba(200, 160, 80, 0.6);
+}
+.jutsu-release.element-lightning {
+  --release-color: rgba(180, 130, 255, 0.9);
+  --release-glow: rgba(200, 160, 255, 0.6);
+}
+.jutsu-release.element-wind {
+  --release-color: rgba(120, 220, 180, 0.9);
+  --release-glow: rgba(150, 240, 200, 0.6);
+}
+.jutsu-release.element-none {
+  --release-color: rgba(200, 200, 255, 0.9);
+  --release-glow: rgba(180, 180, 255, 0.6);
 }
 
 /* ---- Quick Select ---- */
@@ -1133,22 +1409,31 @@ body {
 }
 
 @keyframes completedPulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 25px rgba(76, 175, 80, 0.3), 0 0 50px rgba(76, 175, 80, 0.1);
   }
   50% {
-    box-shadow: 0 0 35px rgba(76, 175, 80, 0.5), 0 0 70px rgba(76, 175, 80, 0.15);
+    box-shadow: 0 0 35px rgba(76, 175, 80, 0.5),
+      0 0 70px rgba(76, 175, 80, 0.15);
   }
 }
 
 @keyframes ringPulseGreen {
-  0%, 100% { transform: scale(1); opacity: 0.2; }
-  50% { transform: scale(1.08); opacity: 0.06; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.06;
+  }
 }
 
 /* ---- 点击高亮区提示文字可重播 ---- */
 .seal-spotlight.completed .spotlight-guide::after {
-  content: ' 🔄';
+  content: " 🔄";
 }
 
 /* ---- 动画播放中的状态标识 ---- */
