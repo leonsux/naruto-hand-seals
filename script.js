@@ -938,7 +938,7 @@ const JUTSU_DATABASE = {
     description:
       "自来也与蛤蟆文太、蛤蟆龙的三体连携忍术。油+火+风三属性合一，形成超高温油河淹没敌人。",
   },
-  "蛤蟆油炎弹: {
+  "蛤蟆油炎弹": {
     romaji: "Gamayu Endan",
     user: "自来也 / 蛤蟆文太",
     rank: "B",
