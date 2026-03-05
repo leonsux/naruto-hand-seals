@@ -376,7 +376,7 @@ const JUTSU_DATABASE = {
   },
   "水遁·千食鲛": {
     romaji: "Suiton: Senshokukō",
-    user: "干柿 的鬼鲛",
+    user: "干柿鬼鲛",
     rank: "B",
     element: "water",
     seals: ["寅", "丑", "巳", "子"],
@@ -519,7 +519,7 @@ const JUTSU_DATABASE = {
   },
   "土遁·地动核": {
     romaji: "Doton: Chidōkaku",
-    user: "大蛇丸 /  的",
+    user: "大野木",
     rank: "B",
     element: "earth",
     seals: ["亥", "丑", "巳", "戌"],
@@ -718,7 +718,7 @@ const JUTSU_DATABASE = {
   },
   "风遁·风切之术": {
     romaji: "Fūton: Kazekiri no Jutsu",
-    user: "手 的",
+    user: "手鞠",
     rank: "C",
     element: "wind",
     seals: ["丑", "子"],
@@ -918,7 +918,7 @@ const JUTSU_DATABASE = {
     description:
       "忍者学院基础三术之一，创造虚幻的分身。没有实体无法攻击，仅能迷惑对手。鸣人曾经最不擅长的忍术。",
   },
-  " 的体化之术": {
+  "体之术": {
     romaji: "Karada no Jutsu",
     user: "全体忍者",
     rank: "E",
@@ -1249,7 +1249,7 @@ const JUTSU_DATABASE = {
     description:
       "操纵砂子包裹住对手全身。无需结印，我爱罗的砂子会自动防御和攻击。中忍考试的标志性忍术。",
   },
-  "砂 的送葬": {
+  "砂瀑送葬": {
     romaji: "Sabaku Sōsō",
     user: "我爱罗",
     rank: "B",
@@ -1890,7 +1890,7 @@ const JUTSU_DATABASE = {
     element: "none",
     seals: [],
     description:
-      "开启第六门后拳速产生空气摩擦燃烧，形成如孔雀开屏般的火焰拳攻击。凯对吻 的 的鬼鲛时使用。",
+      "开启第六门后拳速产生空气摩擦燃烧，形成如孔雀开屏般的火焰拳攻击。凯对干柿鬼鲛时使用。",
   },
   昼虎: {
     romaji: "Hirudora",
